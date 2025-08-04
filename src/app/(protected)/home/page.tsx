@@ -1,5 +1,6 @@
 import { getSession, signOut } from "@/features/auth";
 import { WelcomeMessage } from "@/features/home";
+import SSEWrapper from "./SSEWrapper";
 
 const HomePage = async () => {
   const session = await getSession();
@@ -10,7 +11,10 @@ const HomePage = async () => {
   };
 
   return (
-    <WelcomeMessage name={session?.user.name ?? ""} signOut={handleSignOut} />
+    <main className="p-8">
+      <WelcomeMessage name={session?.user.name ?? ""} signOut={handleSignOut} />
+      <SSEWrapper /> {/* This mounts the client-only component */}
+    </main>
   );
 };
 
